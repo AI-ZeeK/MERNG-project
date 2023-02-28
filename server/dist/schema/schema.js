@@ -133,6 +133,40 @@ const mutation = new GraphQLObjectType({
                 return ProjectSchema.findByIdAndRemove(args.id);
             },
         },
+        // UPDATE Project
+        updateProject: {
+            type: ProjectType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID) },
+                name: { type: GraphQLNonNull(GraphQLString) },
+                description: { type: GraphQLNonNull(GraphQLString) },
+                status: {
+                    type: new GraphQLEnumType({
+                        name: "ProjectStatusUpdate",
+                        values: {
+                            new: {
+                                value: "Not Started",
+                            },
+                            progress: {
+                                value: "In Progress",
+                            },
+                            completed: {
+                                value: "Completed",
+                            },
+                        },
+                    }),
+                    defaultValue: "Not Started",
+                },
+                clientId: { type: GraphQLNonNull(GraphQLID) },
+            },
+            resolve(parent, args) {
+                const project = ProjectSchema.findByIdAndUpdate(args.id, {
+                    name: args.name,
+                    description: args.description,
+                    status: args.status,
+                });
+            },
+        },
     },
 });
 const schema = new GraphQLSchema({
