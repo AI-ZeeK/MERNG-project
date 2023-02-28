@@ -9,22 +9,25 @@ const AddClientModal = () => {
         type="button"
         className="btn btn-primary"
         data-bs-toggle="modal"
-        data-bs-target="#exampleModal">
-        Launch demo modal
+        data-bs-target="#addClientModal">
+        <div className="d-flex align-items-center">
+          <FaUser className="icon" />
+          <div>Add Client</div>
+        </div>
       </button>
 
       {/* <!-- Modal --> */}
       <div
         className="modal fade"
-        id="exampleModal"
+        id="addClientModal"
         tabIndex={-1}
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="addClientModalX"
         aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
-                Modal title
+              <h1 className="modal-title fs-5" id="addClientModalX">
+                Add Client
               </h1>
               <button
                 type="button"
