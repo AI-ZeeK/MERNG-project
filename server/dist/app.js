@@ -6,9 +6,10 @@ const color = colors;
 dotenv.config();
 import { graphqlHTTP } from "express-graphql";
 import schema from "./schema/schema.js";
+import connectDB from "./config/db.js";
 const app = express();
 const PORT = process.env.PORT || 8080;
-// connectDB();
+connectDB();
 app.use(cors());
 app.use("/graphql", graphqlHTTP({
     schema,
