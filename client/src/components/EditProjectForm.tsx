@@ -27,8 +27,11 @@ const EditProjectForm = ({ project }: Props) => {
     if (!name || !description || !status) {
       return alert("Please fill out all fields");
     }
-
+    
     updateProject(name, description, status);
+    setName("");
+    setDescription("");
+    setStatus("");
   };
 
   return (
