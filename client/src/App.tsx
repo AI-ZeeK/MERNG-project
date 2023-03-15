@@ -30,7 +30,7 @@ const cache = new InMemoryCache({
 });
 
 const client = new ApolloClient({
-  uri: "http://localhost:5000/graphql",
+  uri: "https://gql-app.onrender.com/graphql",
   cache: new InMemoryCache(),
 });
 
