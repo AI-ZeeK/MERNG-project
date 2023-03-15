@@ -154,15 +154,17 @@ const mutation = new GraphQLObjectType({
                                 value: "Completed",
                             },
                         },
+                    }),
                 },
-                clientId: { type: GraphQLNonNull(GraphQLID) },
             },
             resolve(parent, args) {
                 const project = ProjectSchema.findByIdAndUpdate(args.id, {
-                    name: args.name,
-                    description: args.description,
-                    status: args.status,
-                });
+                    $set: {
+                        name: args.name,
+                        description: args.description,
+                        status: args.status,
+                    },
+                }, { new: true });
             },
         },
     },
