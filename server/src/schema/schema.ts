@@ -30,7 +30,7 @@ const ProjectType = new GraphQLObjectType({
     status: { type: GraphQLString },
     client: {
       type: ClientType,
-      resolve(parent, args) {
+      resolve(parent: any, args: any) {
         return ClientSchema.findById(parent.clientId);
       },
     },
@@ -42,27 +42,27 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     projects: {
       type: new GraphQLList(ProjectType),
-      resolve(parents, args) {
+      resolve(parents: any, args: any) {
         return ProjectSchema.find();
       },
     },
     project: {
       type: ProjectType,
       args: { id: { type: GraphQLID } },
-      resolve(parents, args) {
+      resolve(parents: any, args: any) {
         return ProjectSchema.findById(args.id);
       },
     },
     clients: {
       type: new GraphQLList(ClientType),
-      resolve(parents, args) {
+      resolve(parents: any, args: any) {
         return ClientSchema.find();
       },
     },
     client: {
       type: ClientType,
       args: { id: { type: GraphQLID } },
-      resolve(parents, args) {
+      resolve(parents: any, args: any) {
         return ClientSchema.findById(args.id);
       },
     },
@@ -81,7 +81,7 @@ const mutation = new GraphQLObjectType({
         email: { type: GraphQLNonNull(GraphQLString) },
         phone: { type: GraphQLNonNull(GraphQLString) },
       },
-      resolve(parent, args) {
+      resolve(parent: any, args: any) {
         const client = new ClientSchema({
           name: args.name,
           email: args.email,
@@ -96,7 +96,7 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLNonNull(GraphQLID) },
       },
-      resolve(parent, args) {
+      resolve(parent: any, args: any) {
         return ClientSchema.findByIdAndRemove(args.id);
       },
     },
@@ -153,7 +153,7 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLNonNull(GraphQLID) },
         name: { type: GraphQLString },
-        description: { type:GraphQLString },
+        description: { type: GraphQLString },
 
         status: {
           type: new GraphQLEnumType({
@@ -172,17 +172,19 @@ const mutation = new GraphQLObjectType({
           }),
         },
       },
-      resolve(parent, args) {
-        const project = ProjectSchema.findByIdAndUpdate(args.id, {
-            $set :{
-                name: args.name,
-                description: args.description,
-                status: args.status,
-                },
+      resolve(parent: any, args: any) {
+        const project = ProjectSchema.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              name: args.name,
+              description: args.description,
+              status: args.status,
             },
-        {new : true}
+          },
+          { new: true }
         );
-    },
+      },
     },
   },
 });
